@@ -1,0 +1,1 @@
+require 'aha/color_picker'
