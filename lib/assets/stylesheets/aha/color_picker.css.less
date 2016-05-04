@@ -1,0 +1,148 @@
+.small-colorpicker {
+  z-index: 3000;
+  background-color: white;
+  position: absolute;
+  border-radius: 3px;
+  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.3);
+  display: none;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+  }
+
+  &:after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+  }
+
+  &.small-colorpicker-top-arrow {
+    &:before {
+      border-bottom: 8px solid rgba(0,0,0,0.3);
+      position: absolute;
+      top: -8px;
+    }
+    &:after {
+      border-bottom: 7px solid #fff;
+      top: -7px;
+    }
+  }
+
+  &.small-colorpicker-bottom-arrow {
+    &:before {
+      border-top: 8px solid rgba(0,0,0,0.3);
+      position: absolute;
+      bottom: -8px;
+    }
+    &:after {
+      border-top: 7px solid #fff;
+      bottom: -7px;
+    }
+  }
+
+  &.small-colorpicker-left-arrow {
+    &:before {
+      left: 8px;
+    }
+    &:after {
+      left: 9px;
+    }
+  }
+  &.small-colorpicker-right-arrow {
+    &:before {
+      right: 8px;
+    }
+    &:after {
+      right: 9px;
+    }
+  }
+
+}
+
+
+.small-colorpicker-colors {
+  width: 325px;
+  padding: 5px; 
+}
+
+.small-colorpicker-color {
+  width: 25px;
+  height: 25px;
+  float: left;
+  box-sizing: border-box;
+  cursor: pointer;
+  border: solid 2px transparent;
+
+  &:hover {
+    position: relative;
+    z-index: 3001;
+    outline: 2px solid #fff;
+    box-shadow: 0 0 5px 2px rgba(0,0,0,1);
+  }
+}
+.small-colorpicker-trigger {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  cursor: pointer;
+  border: 1px solid transparent;
+
+  &.disabled {
+  	cursor: auto;
+  }  
+  
+  &:hover:not(.disabled) {
+    z-index: 3000;
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.25);
+    border: 1px solid #fff;
+  }
+}
+.small-colorpicker-custom-label {
+  display: inline-block;
+  width: 200px;
+  text-align: right;
+}
+
+.minicolors-theme-colorpicker {
+  display: inline-block;
+
+  .minicolors-swatch {
+    display: none;
+  }
+
+  .minicolors-input {
+    display: inline-block;
+    box-sizing: border-box;
+    height: 25px;
+    width: 125px;
+    margin: 5px;
+    margin-top: 0px;
+    border: none;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:focus, &:hover {
+      outline: none;
+      border: 2px solid white;
+      box-shadow: 0 0 5px 0px rgba(0, 0, 0, 1);
+    }
+  }
+
+  .minicolors-panel {
+    border-radius: 3px;
+    padding: 3px;
+    margin-top: -5px;
+    margin-left: 3px;
+    left: auto !important;
+    right: 3px;
+  }
+}

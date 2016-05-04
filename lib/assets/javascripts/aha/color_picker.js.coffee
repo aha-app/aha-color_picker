@@ -1,4 +1,4 @@
-# Our internal colorpicker plugin. Listen to the changeColor event 
+# Aha's colorPicker plugin that Listens to the "changeColor" event 
 class ColorPicker
   template: '<div class="small-colorpicker">' +
               '<div class="small-colorpicker-colors"></div>' + 
@@ -122,9 +122,23 @@ class ColorPicker
     bigint = parseInt(colorHex, 16);
     {r: (bigint >> 16) & 255, g: (bigint >> 8) & 255, b: bigint & 255}
 
-@Aha.pluginify("colorPicker", ColorPicker)
+#
+# Create JQuery plugin from class
+#
+extendOptions = {}
+extendOptions["colorPicker"] = (option, args...) ->
+  @each ->
+    $this = $(this)
+    
+    unless data = $this.data("colorPicker")
+      $this.data "colorPicker", (data = new ColorPicker($this, option))
+    if typeof option == 'string'
+      data[option].apply(data, args)
+$.fn.extend extendOptions
 
+#
 # Instantiate common colorpicker.
+#
 $ ->
   $('.small-colorpicker-trigger:not(.disabled)').livequery ->
     $(@).colorPicker().on 'changeColor', (event) ->
