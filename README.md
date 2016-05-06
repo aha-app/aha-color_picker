@@ -12,13 +12,19 @@ Add this line to your application's Gemfile:
 gem 'aha-color_picker'
 ```
 
-And then execute:
+Add to your application js/css manifests:
 
-    $ bundle
+```js
+//= require aha/color_picker
+//= require jquery.minicolors
+```
 
-Or install it yourself as:
-
-    $ gem install aha-color_picker
+```css
+/*
+ *= require aha/color_picker
+ *= require jquery.minicolors
+ */
+```
 
 ## Usage
 
