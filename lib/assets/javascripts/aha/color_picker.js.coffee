@@ -135,23 +135,3 @@ extendOptions["colorPicker"] = (option, args...) ->
     if typeof option == 'string'
       data[option].apply(data, args)
 $.fn.extend extendOptions
-
-#
-# Instantiate common colorpicker.
-#
-$ ->
-  $('.small-colorpicker-trigger:not(.disabled)').livequery ->
-    $(@).colorPicker().on 'changeColor', (event) ->
-      $(this).css('background-color', "##{event.color.hex}");
-
-      data = {}
-      data[$(@).data('model')] = {}
-      data[$(@).data('model')]['color'] = event.color.converted
-
-      url = $(@).data('action') || "/#{$(@).data('model')}s/#{$(@).data('id')}"
-      if $(@).data('format')
-        url += ".#{$(@).data('format')}"
-      $.ajax
-        url: url
-        type: 'PUT'
-        data: data
