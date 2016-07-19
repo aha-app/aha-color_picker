@@ -1,3 +1,5 @@
+{preventScrolling, enableScrolling} = require('./scrolling')
+
 # Aha's colorPicker plugin that Listens to the "changeColor" event 
 class ColorPicker
   template: '<div class="small-colorpicker">' +
