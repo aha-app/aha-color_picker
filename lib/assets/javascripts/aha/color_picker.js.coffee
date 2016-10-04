@@ -48,7 +48,7 @@ class ColorPicker
         color: {hex: @hexColor, converted: @color}
       )
 
-    @picker.hide()
+    @picker.hide() if @picker
 
   createColorPicker: () ->
     picker = $(@template).appendTo("body")
