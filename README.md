@@ -28,7 +28,19 @@ Add to your application js/css manifests:
 
 ## Usage
 
-TODO: Write usage instructions here
+Attach it to a clickable element using jQuery:
+
+```javascript
+$('button.picker').colorPicker();
+```
+
+Options:
+
+* **customColors**: string or array of custom colors to show below the main picker
+
+```javascript
+$('button.picker').colorPicker({customColors: '000000,ffffff'});
+```
 
 ## Development
 

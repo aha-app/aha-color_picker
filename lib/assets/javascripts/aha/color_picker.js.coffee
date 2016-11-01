@@ -17,6 +17,12 @@ class ColorPicker
       if @options.colorAttribute?
         @colors = $(element).attr(@options.colorAttribute).split(",")
 
+      customColors = (@options.customColors || $(element).data('custom-colors') || [])
+      @customColors = if typeof customColors == 'string'
+        customColors.split(',')
+      else
+        customColors || []
+
       @picker ||= @createColorPicker()
       @placePicker()
 
@@ -53,15 +59,36 @@ class ColorPicker
   createColorPicker: () ->
     picker = $(@template).appendTo("body")
     picker.data('colorPicker', @)
+    colorsContainer = picker.find('.small-colorpicker-colors')
+
+    initialColor = @element.data('color') || '#FFFFFF'
+    initialColor = "##{initialColor}" unless initialColor[0] == '#'
+
+    createColorDiv = (color) ->
+      el = $("<div class='small-colorpicker-color' data-color='#{color}' style='background-color:##{color};'></div>")
+      el.addClass('small-colorpicker-color-white') if color.toLowerCase() == 'ffffff'
+      el
+
+    createCustom = () ->
+      container = $("<div/>").addClass("small-colorpicker-custom-container")
+      label = $("<div/>").text("Custom:").addClass("small-colorpicker-custom-label")
+      input = $("<input/>")
+        .val(initialColor)
+        .addClass("small-colorpicker-custom")
+      container.append(label)
+      container.append(input)
 
     if @options.displayRight
       picker.addClass('display-right')
+
     for color in @colors
-      picker.find('.small-colorpicker-colors').append("<div class='small-colorpicker-color' data-color='#{color}' style='background-color:##{color};'></div>")
-    initialColor = @element.data('color') || '#FFFFFF'
-    initialColor = "##{initialColor}" unless initialColor[0] == '#'
-    picker.append("<div class='small-colorpicker-custom-label'>Custom:</div>")
-    picker.append("<input class='small-colorpicker-custom' value='#{initialColor}'></input>")
+      colorsContainer.append(createColorDiv(color))
+
+    for color in @customColors
+      colorsContainer.append(createColorDiv(color))
+
+    colorsContainer.append(createCustom())
+
     @input = picker.find('.small-colorpicker-custom')
     @input.minicolors
       theme: 'colorpicker'
@@ -76,7 +103,7 @@ class ColorPicker
       $(div).css
         top: parseInt($(div).css('top')) + 3
         left: parseInt($(div).css('left')) + 3
-    picker.find('.small-colorpicker-colors').append("<div class='clearfix'></div>").end()
+    colorsContainer.append("<div class='clearfix'></div>").end()
    
   setHexColor: (hex) ->
     return unless /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(hex)

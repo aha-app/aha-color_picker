@@ -9,6 +9,8 @@ require('vendor/assets/stylesheets/jquery.minicolors.css');
 require('javascripts/aha/color_picker.js.coffee');
 require('stylesheets/aha/color_picker.css.less');
 
-$('.color-picker').colorPicker({
+$('.color-picker').colorPicker();
+
+$('.color-picker-custom').colorPicker({
   customColors: '000000,ffffff'
 });
