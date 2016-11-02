@@ -1,4 +1,4 @@
-# Aha's colorPicker plugin that Listens to the "changeColor" event 
+# Aha's colorPicker plugin that emits the "changeColor" event
 class ColorPicker
   template: '<div class="small-colorpicker">' +
               '<div class="small-colorpicker-colors"></div>' + 
@@ -115,7 +115,6 @@ class ColorPicker
     @input.on 'change', (event) =>
       hex = $(event.target).val()
       @setHexColor(hex)
-      @triggerChange()
     @input.on 'click', (event) =>
       @picker.css("opacity", 0)
 
@@ -141,6 +140,7 @@ class ColorPicker
     rgb = @hexToRGB(hex)
     @hexColor = hex
     @color = ((1 << 24) | (parseInt(rgb.r) << 16) | (parseInt(rgb.g) << 8) | parseInt(rgb.b))
+    @triggerChange()
 
   placePicker: () ->
     @picker.show()
