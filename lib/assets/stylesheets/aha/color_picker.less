@@ -81,6 +81,13 @@
   cursor: pointer;
   border: solid 2px transparent;
 
+  &.small-colorpicker-color-white {
+    border: 1px solid #ccc;
+    &:hover {
+      border-color: transparent;
+    }
+  }
+
   &:hover {
     position: relative;
     z-index: 3001;
@@ -105,10 +112,17 @@
     border: 1px solid #fff;
   }
 }
+
+.small-colorpicker-custom-container {
+  padding-top: 5px;
+  display: inline-block;
+  float: right;
+}
+
 .small-colorpicker-custom-label {
   display: inline-block;
-  width: 200px;
   text-align: right;
+  margin-right: 5px;
 }
 
 .minicolors-theme-colorpicker {
@@ -123,7 +137,6 @@
     box-sizing: border-box;
     height: 25px;
     width: 125px;
-    margin: 5px;
     margin-top: 0px;
     border: none;
     text-align: center;
