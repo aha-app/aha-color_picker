@@ -80,9 +80,6 @@ class ColorPicker
         .val(initialColor)
         .addClass("small-colorpicker-custom")
         .attr("type", "color")
-        .css
-          backgroundColor: initialColor
-          color: @fontFromColor(initialColor)
 
       container.append(label)
       container.append(input)
@@ -100,6 +97,7 @@ class ColorPicker
 
     @input = picker.find('.small-colorpicker-custom')
     @native = @input.prop("type") == "color"
+    @input.css(@inputCss(initialColor))
     @configureCustomPicker(picker)
 
     colorsContainer.append("<div class='clearfix'></div>").end()
@@ -114,6 +112,7 @@ class ColorPicker
       @closePicker() if event.which == 13
 
   configureNativeCustomPicker: (picker) ->
+    @input.css({backgroundColor: null})
     @input.on 'change', (event) =>
       hex = $(event.target).val()
       @setHexColor(hex)
@@ -135,14 +134,19 @@ class ColorPicker
     return unless /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(hex)
     unless @options.dontSetElementColor
       @element.css(backgroundColor: hex)
-    @input.css
-      backgroundColor: hex
-      color: @fontFromColor(hex)
+    @input.css(@inputCss(hex))
     hex = hex.replace('#', '')
     rgb = @hexToRGB(hex)
     @hexColor = hex
     @color = ((1 << 24) | (parseInt(rgb.r) << 16) | (parseInt(rgb.g) << 8) | parseInt(rgb.b))
     @triggerChange()
+
+  inputCss: (newColor) ->
+    cssChanges =
+      color: @fontFromColor(newColor)
+    if !@native
+      cssChanges.backgroundColor = newColor
+    cssChanges
 
   placePicker: () ->
     @picker.show()

@@ -1,6 +1,6 @@
 {
   "name": "aha-color_picker",
-  "version": "1.1.0",
+  "version": "1.1.4",
   "description": "Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/aha/color_picker`. To experiment with that code, run `bin/console` for an interactive prompt.",
   "main": "lib/assets/javascripts/aha/color_picker.coffee",
   "scripts": {
@@ -26,6 +26,7 @@
     "coffee-script": "^1.11.1",
     "css-loader": "^0.25.0",
     "expose-loader": "^0.7.1",
+    "happypack": "3.0.1",
     "jquery": "^3.1.1",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
