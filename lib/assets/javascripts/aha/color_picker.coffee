@@ -41,7 +41,7 @@ class ColorPicker
     @closePicker()
 
   closePicker: (event) =>
-    enableScrolling()
+    enableScrolling() if window.enableScrolling
     $(window).off 'click', @clickClosePicker
 
     if @hexColor && @color
@@ -50,7 +50,7 @@ class ColorPicker
         color: {hex: @hexColor, converted: @color}
       )
 
-    @picker.hide()
+    @picker.hide() if @picker
 
   createColorPicker: () ->
     picker = $(@template).appendTo("body")
@@ -82,7 +82,8 @@ class ColorPicker
    
   setHexColor: (hex) ->
     return unless /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(hex)
-    @element.css(backgroundColor: hex)
+    unless @options.dontSetElementColor
+      @element.css(backgroundColor: hex)
     @input.css
       backgroundColor: hex
       color: @fontFromColor(hex)
@@ -93,7 +94,7 @@ class ColorPicker
 
   placePicker: () ->
     @picker.show()
-    preventScrolling()
+    preventScrolling() if window.preventScrolling
     elemRect = @element[0].getBoundingClientRect()
     css = {}
     if elemRect.bottom - elemRect.height/2 < window.innerHeight/2
