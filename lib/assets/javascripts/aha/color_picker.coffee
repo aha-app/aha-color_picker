@@ -32,15 +32,17 @@ class ColorPicker
 
       $(window).on 'click', @clickClosePicker
 
+
   clickClosePicker: (event) =>
     return if $(event.target)[0] == @element[0]
     return if $(event.target).is('.small-colorpicker-custom')
     return if $(event.target).is('.minicolors')
     return if $(event.target).parents('.minicolors').length > 0
+    return if $(event.target).parent()[0] == @element[0]
     return unless @picker.is(':visible')
     @closePicker()
 
-  closePicker: (event) =>
+  closePicker: () =>
     enableScrolling() if window.enableScrolling
     $(window).off 'click', @clickClosePicker
 
@@ -79,6 +81,7 @@ class ColorPicker
         top: parseInt($(div).css('top')) + 3
         left: parseInt($(div).css('left')) + 3
     picker.find('.small-colorpicker-colors').append("<div class='clearfix'></div>").end()
+
    
   setHexColor: (hex) ->
     return unless /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(hex)
