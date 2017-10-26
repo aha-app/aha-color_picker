@@ -29,6 +29,11 @@ class ColorPicker
         @setHexColor(hex)
         @closePicker()
         false
+      @picker.on "click.colorPickerColor", ".small-colorpicker-no-fill-button", (event) => 
+        @input.minicolors('value', '#fff')
+        @setNoFilll()
+        @closePicker()
+        false
 
       $(window).on 'click', @clickClosePicker
 
@@ -62,10 +67,24 @@ class ColorPicker
       picker.addClass('display-right')
     for color in @colors
       picker.find('.small-colorpicker-colors').append("<div class='small-colorpicker-color' data-color='#{color}' style='background-color:##{color};'></div>")
+
+
+    picker.append("<div class='small-colorpicker-footer'></div>")
     initialColor = @element.data('color') || '#FFFFFF'
     initialColor = "##{initialColor}" unless initialColor[0] == '#'
-    picker.append("<div class='small-colorpicker-custom-label'>Custom:</div>")
-    picker.append("<input class='small-colorpicker-custom' value='#{initialColor}'></input>")
+
+    footer = picker.find(".small-colorpicker-footer")
+
+    if @options.noFill
+      footer.append("<div class='small-colorpicker-footer-item first-item pull-left'>
+        <a href='#' class='btn small-colorpicker-no-fill-button'>#{@options.noFill}</a>
+      </div>")
+
+    footer.append("<div class='small-colorpicker-footer-item pull-right'>
+      <div class='small-colorpicker-custom-label'>Custom:</div>
+      <input class='small-colorpicker-custom' value='#{initialColor}'></input>
+    </div>")
+    footer.append("<div class='clearfix'></div>")
     @input = picker.find('.small-colorpicker-custom')
     @input.minicolors
       theme: 'colorpicker'
@@ -83,6 +102,10 @@ class ColorPicker
     picker.find('.small-colorpicker-colors').append("<div class='clearfix'></div>").end()
 
    
+  setNoFilll: () ->
+    @hexColor = 'transparent'
+    @color = 'transparent'
+
   setHexColor: (hex) ->
     return unless /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(hex)
     unless @options.dontSetElementColor

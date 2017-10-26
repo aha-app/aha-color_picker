@@ -105,9 +105,28 @@
     border: 1px solid #fff;
   }
 }
+
+.small-colorpicker-footer {
+  padding: 0px 5px 5px 5px;
+}
+.small-colorpicker-footer-item {
+  width: 160px;
+
+  &.first-item {
+    margin-right: 5px;
+  }
+}
+
+.small-colorpicker-no-fill-button {
+  background-color: white !important;
+  border: 1px solid #ccc !important;
+  height: 15px;
+  line-height: 16px;
+  font-size: 12px;
+}
+
 .small-colorpicker-custom-label {
   display: inline-block;
-  width: 200px;
   text-align: right;
 }
 
@@ -122,8 +141,8 @@
     display: inline-block;
     box-sizing: border-box;
     height: 25px;
-    width: 125px;
-    margin: 5px;
+    width: 106px;
+    margin-left: 5px;
     margin-top: 0px;
     border: none;
     text-align: center;
@@ -132,8 +151,8 @@
 
     &:focus, &:hover {
       outline: none;
-      border: 2px solid white;
-      box-shadow: 0 0 5px 0px rgba(0, 0, 0, 1);
+      // border: 2px solid white;
+      box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.3);
     }
   }
 
